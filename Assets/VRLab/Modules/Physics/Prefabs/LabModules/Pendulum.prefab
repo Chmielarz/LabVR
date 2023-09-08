@@ -1068,6 +1068,7 @@ GameObject:
   - component: {fileID: 7361301262372704725}
   - component: {fileID: 888830346805833696}
   - component: {fileID: 8259812444021142900}
+  - component: {fileID: 6309169156871851011}
   m_Layer: 0
   m_Name: Anchor
   m_TagString: Untagged
@@ -1142,6 +1143,18 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &6309169156871851011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2946395367802585774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 718f9b9bb0b119f45a807ec8a019f917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3067366336922240173
 GameObject:
   m_ObjectHideFlags: 0
@@ -2312,6 +2325,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3947481939308885966}
+  - component: {fileID: 7346523369687187635}
   m_Layer: 0
   m_Name: Pendulum
   m_TagString: Untagged
@@ -2339,6 +2353,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7346523369687187635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6428784532671294556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dc7daeddd7ea18488a2887ada7e5142, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6442515876971580737
 GameObject:
   m_ObjectHideFlags: 0
