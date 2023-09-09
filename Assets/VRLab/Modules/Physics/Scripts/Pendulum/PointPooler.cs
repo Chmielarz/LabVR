@@ -43,7 +43,8 @@ public class PointPooler : MonoBehaviour
         }
     }
 
-    public void SpawnFromPool(string tag, Vector3 pos)      // @TODO Do I want to return the objectToSpawn?
+    public void SpawnFromPool(Vector3 pos)      // @TODO Do I want to return the objectToSpawn?
+                                                //  Vec2 or Vec3?
     {
         GameObject objectToSpawn = poolDictionary.Dequeue();
         objectToSpawn.transform.position = pos;

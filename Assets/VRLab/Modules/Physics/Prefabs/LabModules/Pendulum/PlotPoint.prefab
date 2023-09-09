@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7483289968088243022}
   - component: {fileID: 7411649952462167896}
   - component: {fileID: 1140951434380169023}
+  - component: {fileID: 2585863425559170104}
   m_Layer: 5
   m_Name: PlotPoint
   m_TagString: Untagged
@@ -76,3 +77,15 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2585863425559170104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6390325057081757769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8d85d9324b11bd468c4c4562f1181ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

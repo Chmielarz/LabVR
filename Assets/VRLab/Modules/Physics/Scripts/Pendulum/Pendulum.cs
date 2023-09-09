@@ -3,23 +3,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// @TODO add to a namespace
+
 public class Pendulum : MonoBehaviour
 {
     [SerializeField] AnchorAngle anchor;
+    [SerializeField] private GameObject plotCanvas;
 
-    void setAngle(float angle)
-    {
-        anchor.SetAngle(angle);
-    }
+    [SerializeField] private GameObject pt;//temp
+    [SerializeField] private float angle = 0.0f;//temp
 
-    // Start is called before the first frame update
+    private PointPooler pointPool;
+    [SerializeField] private float interval = 2.0f; // in seconds
+
     void Start()
     {
-        setAngle(40.0f);
+        pointPool = PointPooler.Instance;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void StartPendulum()
     {
+        InvokeRepeating("SpawnPoint", interval, interval);
+        anchor.SetAngle(angle);
+        anchor.UnfreezeCube();
+
+    }
+
+    private void SpawnPoint()
+    {
+
+        Vector3 cubepos = anchor.GetCubePosition();
+        Vector3 newPos = new Vector3(cubepos.x,
+            plotCanvas.transform.position.y,
+            cubepos.z);
+
+        // get the screen position
+
+        //Vector2 screenPoint = plotCanvas.GetComponent<Canvas>().
+        //    .WorldToScreenPoint(Camera.main, worldPosition);
+
+        // convert the screen position to the local anchored position
+
+        //Vector2 anchoredPosition = transform.InverseTransformPoint(screenPoint);
+
+        pointPool.SpawnFromPool(newPos);
     }
 }
