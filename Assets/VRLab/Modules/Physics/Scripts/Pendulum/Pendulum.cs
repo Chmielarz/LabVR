@@ -3,49 +3,52 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// @TODO add to a namespace
-
-public class Pendulum : MonoBehaviour
+namespace PhysicsLab
 {
-    [SerializeField] AnchorAngle anchor;
-    [SerializeField] private GameObject plotCanvas;
-
-    [SerializeField] private GameObject pt;//temp
-    [SerializeField] private float angle = 0.0f;//temp
-
-    private PointPooler pointPool;
-    [SerializeField] private float interval = 2.0f; // in seconds
-
-    void Start()
+    public class Pendulum : MonoBehaviour
     {
-        pointPool = PointPooler.Instance;
-    }
+        [SerializeField] private GameObject pt;//temp
 
-    public void StartPendulum()
-    {
-        InvokeRepeating("SpawnPoint", interval, interval);
-        anchor.SetAngle(angle);
-        anchor.UnfreezeCube();
 
-    }
+        [SerializeField] AnchorAngle anchor;
+        [SerializeField] private GameObject plotCanvas;
+        private PointPooler pointPool;
 
-    private void SpawnPoint()
-    {
+        [SerializeField] private float interval = 2.0f; // in seconds
+        [SerializeField] private float angle = 0.0f;
 
-        Vector3 cubepos = anchor.GetCubePosition();
-        Vector3 newPos = new Vector3(cubepos.x,
-            plotCanvas.transform.position.y,
-            cubepos.z);
+        void Start()
+        {
+            pointPool = PointPooler.Instance;
+            anchor.SetAngle(30.0f);
+            //anchor.FreezeCube();
+        }
 
-        // get the screen position
+        public void StartPendulum()
+        {
+            InvokeRepeating("SpawnPoint", interval, interval);
+            anchor.UnfreezeCube();
+            anchor.SetAngle(angle);
+        }
 
-        //Vector2 screenPoint = plotCanvas.GetComponent<Canvas>().
-        //    .WorldToScreenPoint(Camera.main, worldPosition);
+        private void SpawnPoint()
+        {
 
-        // convert the screen position to the local anchored position
+            Vector3 cubepos = anchor.GetCubePosition();
+            Vector3 newPos = new Vector3(cubepos.x,
+                plotCanvas.transform.position.y,
+                cubepos.z);
 
-        //Vector2 anchoredPosition = transform.InverseTransformPoint(screenPoint);
+            // get the screen position
 
-        pointPool.SpawnFromPool(newPos);
+            //Vector2 screenPoint = plotCanvas.GetComponent<Canvas>().
+            //    .WorldToScreenPoint(Camera.main, worldPosition);
+
+            // convert the screen position to the local anchored position
+
+            //Vector2 anchoredPosition = transform.InverseTransformPoint(screenPoint);
+
+            pointPool.SpawnFromPool(newPos);
+        }
     }
 }

@@ -1,6 +1,7 @@
-using UnityEngine;
-
-public interface IPooledPoint
+namespace PhysicsLab
 {
-    void OnObjectSpawn();
+    public interface IPooledPoint
+    {
+        void OnObjectSpawn();
+    }
 }
