@@ -2,63 +2,71 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MagneticField : MonoBehaviour
+namespace PhysicsLab
 {
-    private bool repulsion = false;
-    private bool attraction = false;
-    private bool inContact = false;
-    private Vector3 otherObjectPosition;
-    private float distance;
-    void Start()
+    public class MagneticField : MonoBehaviour
     {
-        
-    }
+        private bool repulsion = false;
+        private bool attraction = false;
+        private bool inContact = false;
+        private Vector3 otherObjectPosition;
+        private float distance;
+        [SerializeField] private GameObject magnetParent;
 
-    void Update()
-    {
-        if (!inContact)
+        void Update()
         {
-            if (repulsion)
+            if (!inContact)
             {
-                distance = Vector3.Distance(otherObjectPosition, transform.position);
-                transform.position = Vector3.MoveTowards(transform.position, otherObjectPosition, distance * Time.deltaTime * -1);
+                if (repulsion)
+                {
+                    distance = Vector3.Distance(otherObjectPosition, transform.position);
+                    magnetParent.transform.position = Vector3.MoveTowards(magnetParent.transform.position, otherObjectPosition, distance * Time.deltaTime * -1);
+                }
+                else if (attraction)
+                {
+                    distance = Vector3.Distance(otherObjectPosition, transform.position);
+                    magnetParent.transform.position = Vector3.MoveTowards(magnetParent.transform.position, otherObjectPosition, distance * Time.deltaTime);
+                }
             }
-            else if (attraction)
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.tag == gameObject.tag)
             {
-                distance = Vector3.Distance(otherObjectPosition, transform.position);
-                transform.position = Vector3.MoveTowards(transform.position, otherObjectPosition, distance * Time.deltaTime);
-                Debug.Log("ATTRACTION");
+                otherObjectPosition = other.transform.position;
+                repulsion = true;
+            }
+            else if (other.CompareTag("MagneticNorthPole") || other.CompareTag("MagneticSouthPole"))
+            {
+                otherObjectPosition = other.transform.position;
+                attraction = true;
             }
         }
-        
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == gameObject.tag)
+
+        private void OnTriggerExit(Collider other)
         {
-            otherObjectPosition = other.transform.position;
-            repulsion = true;
+            repulsion = false;
+            attraction = false;
         }
-        else if (other.CompareTag("MagneticNorthPole") || other.CompareTag("MagneticSouthPole"))
+
+        private void OnCollisionEnter(Collision collision)
         {
-            otherObjectPosition = other.transform.position;
-            attraction = true;
+            string otherObjectTag = collision.gameObject.tag;
+            if (otherObjectTag == "MagneticNorthPole" || otherObjectTag == "MagneticSouthPole")
+            {
+                inContact = true;
+            }
         }
-    }
 
-    private void OnTriggerExit(Collider other)
-    {
-        repulsion = false;
-        attraction = false;
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        inContact = true;
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        inContact = false;
+        private void OnCollisionExit(Collision collision)
+        {
+            string otherObjectTag = collision.gameObject.tag;
+            if (otherObjectTag == "MagneticNorthPole" || otherObjectTag == "MagneticSouthPole")
+            {
+                inContact = false;
+            }
+        }
     }
 }
+
